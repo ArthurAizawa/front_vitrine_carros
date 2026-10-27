@@ -1,34 +1,46 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Carros } from '../../models/carros';
+import { CarroCard } from '../carro-card/carro-card';
+import { CarrosService } from '../../services/CarroService';
 
 @Component({
-  imports: [CommonModule],
   selector: 'app-carros-list',
+  imports: [CarroCard],
   styleUrl: './carros-list.scss',
   templateUrl: './carros-list.html',
 })
-export class CarrosList {
-  lista: Carros[] = []
-  constructor() {
-    let carro1: Carros = new Carros()
-    carro1.id = 1;
-    carro1.nome = "Focus"
-    carro1.marca = "Ford"
+export class CarrosList implements OnInit {
+  private service = inject(CarrosService);
 
-    let carro2: Carros = new Carros()
-    carro2.id = 2;
-    carro2.nome = "Uno"
-    carro2.marca = "Fiat"
+  list = signal<Carros[]>([]);
+  busca = signal('');
+  carregando = signal(true);
+  erro = signal(false);
 
-    let carro3: Carros = new Carros()
-    carro3.id = 3;
-    carro3.nome = "Kwid"
-    carro3.marca = "Renault"
+  filtrados = computed(() => {
+    const termo = this.busca().trim().toLowerCase();
+    if (!termo) return this.list();
+    return this.list().filter(
+      (c) =>
+        c.nome.toLowerCase().includes(termo) ||
+        c.marca.toLowerCase().includes(termo)
+    );
+  });
 
-    this.lista.push(carro1)
-    this.lista.push(carro2)
-    this.lista.push(carro3)
+  ngOnInit() {
+    this.service.listar().subscribe({
+      next: (dados) => {
+        this.list.set(dados);
+        this.carregando.set(false);
+      },
+      error: () => {
+        this.erro.set(true);
+        this.carregando.set(false);
+      },
+    });
+  }
 
+  atualizarBusca(event: Event) {
+    this.busca.set((event.target as HTMLInputElement).value);
   }
 }

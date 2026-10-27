@@ -1,0 +1,12 @@
+<article class="card">
+    <div class="card__image">
+        <span class="card__badge">{{carro().ano}}</span><span class="card__initial">{{carro().marca.charAt(0)}}</span>
+    </div>
+
+    <div class="card__body">
+        <span class="card__brand">{{carro().marca}}</span>
+        <h3 class="card__title">{{carro().nome}}</h3>
+        <p class="card__price">{{carro().preco | currency:'BRL'}}</p>
+        <button class="card__button"  type="button">Ver detalhes</button>
+    </div>
+</article>
