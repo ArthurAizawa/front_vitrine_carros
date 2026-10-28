@@ -1,0 +1,30 @@
+<section class="hero">
+  <div class="hero__content">
+    <h1>Encontre o carro ideal para você</h1>
+    <p>Veículos selecionados, atendimento de confiança e as melhores condições da região.</p>
+    <a class="btn" routerLink="/carros">Ver carros disponíveis</a>
+  </div>
+</section>
+
+<section class="sobre">
+  <h2>Sobre a AutoShop</h2>
+  <p>
+    Escreva aqui a história da empresa: quando começou, o que ela faz e o que a diferencia.
+    Este é o espaço para passar confiança a quem está visitando o site.
+  </p>
+</section>
+
+<section class="diferenciais">
+  @for (item of diferenciais; track item.titulo) {
+    <article class="diferencial">
+      <span class="diferencial__icone">{{ item.icone }}</span>
+      <h3>{{ item.titulo }}</h3>
+      <p>{{ item.texto }}</p>
+    </article>
+  }
+</section>
+
+<section class="cta">
+  <h2>Pronto para encontrar o seu próximo carro?</h2>
+  <a class="btn" routerLink="/carros">Conhecer a vitrine</a>
+</section>

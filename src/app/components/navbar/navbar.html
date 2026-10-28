@@ -1,0 +1,10 @@
+<mat-toolbar class="navbar">
+    <a class="navbar__logo" routerLink="/">AutoShop</a>
+    <span class="spacer"></span>
+
+    <nav class="navbar__links">
+        <a mat-button routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Inicio</a>
+        <a mat-button routerLink="/carros" routerLinkActive="active">Carros</a>
+        <a mat-button routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    </nav>
+</mat-toolbar>
