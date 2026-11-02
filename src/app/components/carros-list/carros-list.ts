@@ -2,10 +2,15 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Carros } from '../../models/carros';
 import { CarroCard } from '../carro-card/carro-card';
 import { CarrosService } from '../../services/CarroService';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-carros-list',
-  imports: [CarroCard],
+  imports: [CarroCard, MatFormFieldModule, MatInputModule, MatIconModule, MatProgressSpinnerModule, MatCard],
   styleUrl: './carros-list.scss',
   templateUrl: './carros-list.html',
 })

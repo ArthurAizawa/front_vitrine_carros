@@ -1,25 +1,27 @@
 <section class="vitrine">
   <div class="vitrine__topo">
     <h2>Nossos carros</h2>
-    <input
-      type="search"
-      placeholder="Buscar por nome ou marca..."
-      [value]="busca()"
-      (input)="atualizarBusca($event)"
-    />
+
+    <mat-form-field appearance="outline" class="busca">
+      <mat-label>Buscar por nome ou marca</mat-label>
+      <input matInput type="search" [value]="busca()" (input)="atualizarBusca($event)">
+      @if (carregando()) {
+      <div class="msg"><mat-spinner [diameter]="40" /></div>
+      }
+    </mat-form-field>
   </div>
 
   @if (carregando()) {
-    <p class="msg">Carregando...</p>
+  <p class="msg">Carregando...</p>
   } @else if (erro()) {
-    <p class="msg msg--erro">Não foi possível carregar os carros. Verifique se a API está no ar.</p>
+  <p class="msg msg--erro">Não foi possível carregar os carros. Verifique se a API está no ar.</p>
   } @else if (filtrados().length === 0) {
-    <p class="msg">Nenhum carro encontrado.</p>
+  <p class="msg">Nenhum carro encontrado.</p>
   } @else {
-    <div class="grid">
-      @for (carro of filtrados(); track carro.id) {
-        <app-carro-card [carro]="carro" />
-      }
-    </div>
+  <div class="grid">
+    @for (carro of filtrados(); track carro.id) {
+    <app-carro-card [carro]="carro" />
+    }
+  </div>
   }
 </section>
